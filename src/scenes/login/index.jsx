@@ -4,31 +4,17 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { withRouter } from 'react-router-dom';
-import React from 'react';
+import { Navigate } from "react-router-dom";
 import Register from "../register";
-
-
-
-const SignUpButton = ({ history }) => {
-  const handleClick = () => {
-    history.push('../register');
-  };
-
-  return (
-    <Button type="submit" color="secondary" variant="contained" onClick={handleClick}>
-      You don't have an account? SIGN UP
-    </Button>
-  );
-};
-
-
-
-
-
-
+import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 
 
 const Login = () => {
+
+
+  
+  
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
@@ -96,12 +82,23 @@ const Login = () => {
               />
             </Box>
             <Box display="flex" justifyContent="center" mt="20px" gap="30px">
+            <Link to="/dashboard">
               <Button type="submit" color="secondary" variant="contained">
 LOGIN </Button>
+</Link>
             
             
-<SignUpButton/>
+
             </Box>
+            <Box display="flex" justifyContent="center" mt="20px" gap="30px">
+     <Link to="/register">
+      
+      <Button type="submit" color="secondary" variant="contained" >
+        register a 
+      </Button>
+      </Link>
+    </Box>
+    
           </form>
         )}
       </Formik>
