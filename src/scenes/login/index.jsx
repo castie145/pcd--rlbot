@@ -4,33 +4,37 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { withRouter } from 'react-router-dom';
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import Register from "../register";
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
-
+import Sidebar from "../global/Sidebar";
+import Topbar from "../global/Topbar";
 
 const Login = () => {
-
-
-  
-  
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
     console.log(values);
   };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const [isSidebar, setIsSidebar] = useState(false);
+
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    contact: "",
+    address1: "",
+    address2: "",
+  };
 
   return (
-    
     <Box m="100px">
-      
       <Header title="WELCOME TO TRADING PLATFORM" subtitle="LOGIN" />
 
-      <Formik
-        onSubmit={handleFormSubmit}
-        initialValues={initialValues}
-      >
+      <Formik onSubmit={handleFormSubmit} initialValues={initialValues}>
         {({
           values,
           errors,
@@ -48,8 +52,6 @@ const Login = () => {
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 2" },
               }}
             >
-              
-             
               <TextField
                 fullWidth
                 variant="filled"
@@ -63,8 +65,7 @@ const Login = () => {
                 helperText={touched.email && errors.email}
                 sx={{ gridColumn: "span 1" }}
               />
-              
-           
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -76,45 +77,30 @@ const Login = () => {
                 name="address2"
                 error={!!touched.address2 && !!errors.address2}
                 helperText={touched.address2 && errors.address2}
-                
                 sx={{ gridColumn: "span 1" }}
-               
               />
             </Box>
-            <Box display="flex" justifyContent="center" mt="20px" gap="30px">
-            <Link to="/dashboard">
-              <Button type="submit" color="secondary" variant="contained">
-LOGIN </Button>
-</Link>
-            
-            
 
-            </Box>
             <Box display="flex" justifyContent="center" mt="20px" gap="30px">
-     <Link to="/register">
-      
-      <Button type="submit" color="secondary" variant="contained" >
-        register a 
-      </Button>
-      </Link>
-    </Box>
-    
+              <Link to="/dashboard">
+                <Button type="submit" color="secondary" variant="contained">
+                  LOGIN
+                </Button>
+              </Link>
+            </Box>
+
+            <Box display="flex" justifyContent="center" mt="20px" gap="30px">
+              <Link to="/register">
+                <Button type="submit" color="secondary" variant="contained">
+                  register a
+                </Button>
+              </Link>
+            </Box>
           </form>
         )}
       </Formik>
     </Box>
   );
-};
-
-
-
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
 };
 
 export default Login;

@@ -18,17 +18,34 @@ import Register from "./scenes/register";
 
 function App() {
   const [theme, colorMode] = useMode();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isSidebar, setIsSidebar] = useState(true);
+
+  const handleLogin = () => {
+    setIsLoggedIn(false);
+    setIsSidebar(false);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        
+        <div className="app">
+          {isLoggedIn && <Sidebar isSidebar={isSidebar} />}
+          <main className="content">
+            {isLoggedIn && (
+              <Topbar
+                setIsSidebar={setIsSidebar}
+                handleLogout={handleLogout}
+              />
+            )}
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/" element={<Login />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Login handleLogin={handleLogin} />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
@@ -37,9 +54,10 @@ function App() {
               <Route path="/line" element={<Line />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
-              <Route path="/register" element={<Register/>} />
+              <Route path="/register" element={<Register />} />
             </Routes>
-          
+          </main>
+        </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

@@ -17,6 +17,8 @@ import { Input } from '@mui/material';
 import Sidebar from "../global/Sidebar";
 import Topbar from "../global/Topbar";
 
+
+
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -32,12 +34,11 @@ const Dashboard = () => {
 
 
   return (
-    <div className="apppp">
-      
-    <Sidebar isSidebar={isSidebar} />
+
+    
     
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      <Topbar setIsSidebar={setIsSidebar} />
+   
 
       <Box m="60px">
         
@@ -280,7 +281,8 @@ const Dashboard = () => {
         </Box>
       </Box>
     </div>
-    </div>
+   
+  
   );
 };
 
